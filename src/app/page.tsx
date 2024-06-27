@@ -1,3 +1,5 @@
+import SignInBtn from "@/components/auth/SignInBtn";
+
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
@@ -5,6 +7,9 @@ export default function HomePage() {
         <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           <span className="text-[hsl(280,100%,70%)]">Tempo</span> Runner
         </h1>
+        <div>
+          <SignInBtn />
+        </div>
       </div>
     </main>
   );

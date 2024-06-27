@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/components/auth/AuthProvider";
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
