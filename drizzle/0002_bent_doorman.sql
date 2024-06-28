@@ -1,0 +1,1 @@
+ALTER TABLE "tempo-runner_user" RENAME COLUMN "access_token" TO "accessToken";

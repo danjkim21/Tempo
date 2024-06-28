@@ -1,0 +1,1 @@
+ALTER TABLE "tempo-runner_session" ADD COLUMN "accessToken" text;

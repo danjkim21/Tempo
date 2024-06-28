@@ -8,6 +8,41 @@
       "when": 1719496882932,
       "tag": "0000_hesitant_makkari",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1719579774168,
+      "tag": "0001_next_talos",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1719579875199,
+      "tag": "0002_bent_doorman",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1719580047824,
+      "tag": "0003_abnormal_the_leader",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1719580176318,
+      "tag": "0004_numerous_sharon_carter",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1719580427233,
+      "tag": "0005_perfect_metal_master",
+      "breakpoints": true
     }
   ]
 }

@@ -14,7 +14,7 @@ export default function SignInBtn() {
   } else if (status === "authenticated") {
     return (
       <Button asChild>
-        <Link href="/dashboard">Dashboard</Link>
+        <Link href="/playlists">Go to App</Link>
       </Button>
     );
   }
