@@ -30,7 +30,13 @@ export default function PlaylistCard({
       <CardHeader className="flex items-center gap-4">
         <div className="bg-muted flex h-16 w-16 items-center justify-center rounded-full text-4xl">
           {/* <Music2Icon className="text-muted-foreground" /> */}
-          <Image src={image.url} alt="" width={64} height={64} />
+          <Image
+            src={image.url}
+            alt=""
+            width={64}
+            height={64}
+            className="h-16 w-16 object-cover"
+          />
         </div>
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-center">
