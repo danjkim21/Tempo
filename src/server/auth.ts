@@ -15,6 +15,11 @@ import {
   users,
   verificationTokens,
 } from "@/server/db/schema";
+import {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -28,6 +33,7 @@ declare module "next-auth" {
       id: string;
       // ...other properties
     } & DefaultSession["user"];
+    accessToken?: string;
   }
 
   // interface User {

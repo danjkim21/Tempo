@@ -8,24 +8,34 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { type SVGProps } from "react";
+import Image from "next/image";
 
 // type PlaylistCardProps = {};
 
-export default function PlaylistCard() {
-// {}: PlaylistCardProps
+export default function PlaylistCard({
+  name,
+  trackCount,
+  image,
+}: {
+  name: string;
+  trackCount: number;
+  image: string;
+}) {
+  // {}: PlaylistCardProps
   return (
     <Card className="playlist">
       <Link href="#" className="" prefetch={false}>
-        <span className="sr-only">Select Playlist</span>
+        <span className="sr-only">Select {name} Playlist</span>
       </Link>
       <CardHeader className="flex items-center gap-4">
         <div className="bg-muted flex h-16 w-16 items-center justify-center rounded-full text-4xl">
-          <Music2Icon className="text-muted-foreground" />
+          {/* <Music2Icon className="text-muted-foreground" /> */}
+          <Image src={image.url} alt="" width={64} height={64} />
         </div>
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-center">
-        <h3 className="font-semibold">Chill Vibes</h3>
-        <p className="text-muted-foreground text-sm">20 tracks</p>
+        <h3 className="font-semibold">{name}</h3>
+        <p className="text-muted-foreground text-sm">{trackCount} tracks</p>
       </CardContent>
       <CardFooter>
         <Button className="w-full">Select</Button>

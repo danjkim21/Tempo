@@ -1,22 +1,57 @@
-"use client";
+import { getServerSession } from "next-auth";
+import PlaylistGrid from "./PlaylistGrid";
+import { authOptions } from "@/server/auth";
 
-import PlaylistCard from "@/components/PlaylistCard";
-import { useSession } from "next-auth/react";
+// TODO: fix types for spotify response later
 
-export default function PlaylistsPage() {
-  const { data: session } = useSession();
-  console.log(session);
+export type playlistResponseType = {
+  href: string;
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
+  items: PlaylistType[];
+};
+export type PlaylistType = {
+  collaborative: boolean;
+  description: string;
+  external_urls: Record<string, string>;
+  href: string;
+  id: string;
+  images: string[];
+  name: string;
+  owner: Record<string, unknown>;
+  primary_color: string | null;
+  public: boolean;
+  snapshot_id: string;
+  tracks: Record<string, unknown>;
+  type: string;
+  uri: string;
+};
+
+export default async function PlaylistsPage() {
+  const session = await getServerSession(authOptions);
+
+  const response: Response = await fetch(
+    "https://api.spotify.com/v1/me/playlists?offset=0&limit=50",
+    {
+      headers: {
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+    },
+  );
+
+  const playlists: playlistResponseType = await response.json();
 
   return (
     <div className="grid gap-8">
-      <div>
+      <section>
         <h2 className="mb-4 text-2xl font-bold">Select a Playlist</h2>
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <PlaylistCard />
-        </div>
-      </div>
+        <PlaylistGrid playlists={playlists.items} />
+      </section>
 
-      {/* <div>
+      {/* <section>
         <h2 className="mb-4 text-2xl font-bold">Playlist Details</h2>
         <Card>
           <CardHeader className="flex items-center gap-4">
@@ -38,7 +73,7 @@ export default function PlaylistsPage() {
             <Button>Use Playlist</Button>
           </CardFooter>
         </Card>
-      </div> */}
+      </section> */}
     </div>
   );
 }
