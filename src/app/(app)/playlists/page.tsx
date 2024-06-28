@@ -3,7 +3,6 @@ import PlaylistGrid from "./PlaylistGrid";
 import { authOptions } from "@/server/auth";
 
 // TODO: fix types for spotify response later
-
 export type playlistResponseType = {
   href: string;
   limit: number;

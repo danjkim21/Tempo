@@ -15,6 +15,11 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "image-cdn-fa.spotifycdn.com",
+        pathname: "/image/**",
+      },
+      {
+        protocol: "https",
         hostname: "mosaic.scdn.co",
         pathname: "/640/**",
       },
