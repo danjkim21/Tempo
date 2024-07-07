@@ -29,7 +29,7 @@ export type PlaylistType = {
   uri: string;
 };
 
-export default async function PlaylistsPage() {
+async function fetchPlaylists(): Promise<playlistResponseType> {
   const session = await getServerSession(authOptions);
 
   const response: Response = await fetch(
@@ -41,7 +41,15 @@ export default async function PlaylistsPage() {
     },
   );
 
-  const playlists: playlistResponseType = await response.json();
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return response.json() as Promise<playlistResponseType>;
+}
+
+export default async function PlaylistsPage() {
+  const playlists: playlistResponseType = await fetchPlaylists();
 
   return (
     <div className="grid gap-8">
