@@ -1,5 +1,3 @@
-// type PlaylistGridProps = {};
-
 import PlaylistCard from "@/components/PlaylistCard";
 import { type PlaylistType } from "./page";
 
@@ -13,6 +11,7 @@ export default function PlaylistGrid({
       {playlists?.map((playlist) => (
         <PlaylistCard
           key={playlist.id}
+          id={playlist.id}
           name={playlist.name}
           trackCount={playlist.tracks.total}
           image={playlist.images[0] ?? ""}

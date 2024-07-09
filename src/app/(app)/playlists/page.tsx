@@ -42,7 +42,8 @@ async function fetchPlaylists(): Promise<playlistResponseType> {
   );
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    // throw new Error(response.statusText);
+    console.log(response.statusText);
   }
 
   return response.json() as Promise<playlistResponseType>;
