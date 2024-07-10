@@ -1,4 +1,5 @@
 // import { Button } from "@/components/ui/button";
+import { Music2Icon } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,10 +8,9 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { authOptions } from "@/server/auth";
-import { SpotifyPlaylist } from "@/types/spotifyTypes";
+import { type SpotifyPlaylist } from "@/types/spotifyTypes";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
-import { type SVGProps } from "react";
 
 async function fetchPlaylistDetail(params: {
   playlistId: string;
@@ -86,24 +86,4 @@ export default async function PlaylistDetailPage({
   );
 }
 {
-}
-
-function Music2Icon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="8" cy="18" r="4" />
-      <path d="M12 18V2l7 4" />
-    </svg>
-  );
 }
