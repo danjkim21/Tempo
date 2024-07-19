@@ -7,7 +7,6 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { type SVGProps } from "react";
 import Image from "next/image";
 import { Music2Icon } from "./Icons";
 

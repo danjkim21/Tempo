@@ -11,14 +11,18 @@ import { authOptions } from "@/server/auth";
 import { type SpotifyPlaylist } from "@/types/spotifyTypes";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { PlaylistTable } from "./playlistTable";
+import { useEffect } from "react";
 
 async function fetchPlaylistDetail(params: {
   playlistId: string;
 }): Promise<SpotifyPlaylist> {
   const session = await getServerSession(authOptions);
 
+  const fields = "images,description,href,id,name,tracks(total)";
+
   const response: Response = await fetch(
-    "https://api.spotify.com/v1/playlists/" + params.playlistId,
+    `https://api.spotify.com/v1/playlists/${params.playlistId}?fields=${fields}`,
     {
       headers: {
         Authorization: `Bearer ${session?.accessToken}`,
@@ -31,7 +35,45 @@ async function fetchPlaylistDetail(params: {
     console.log(response.statusText);
   }
 
-  return response.json() as Promise<SpotifyPlaylist>;
+  return response.json();
+}
+
+async function fetchPlaylistTracks({
+  playlistId,
+  offset = 0,
+}: {
+  playlistId: string;
+  offset?: number;
+}) {
+  const session = await getServerSession(authOptions);
+
+  const limit = 100;
+
+  const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?offset=${offset}&limit=${limit}`;
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${session?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const { items, next } = await response.json();
+
+  if (next) {
+    const nextPageItems = await fetchPlaylistTracks({
+      playlistId,
+      offset: offset + limit,
+      nextPageUrl: next,
+    });
+
+    items.push(...nextPageItems);
+  }
+
+  return items;
 }
 
 export default async function PlaylistDetailPage({
@@ -42,6 +84,12 @@ export default async function PlaylistDetailPage({
   const playlistDetail = await fetchPlaylistDetail({
     playlistId: params.playlistId,
   });
+
+  const playlistTracksAll = await fetchPlaylistTracks({
+    playlistId: params.playlistId,
+  });
+
+  console.log(playlistTracksAll.length);
 
   return (
     <div>
@@ -81,6 +129,22 @@ export default async function PlaylistDetailPage({
             <Button>Save new playlist</Button>
           </CardFooter>
         </Card>
+      </section>
+
+      <section>
+        <h2 className="mb-4 text-xl font-bold">Songs</h2>
+
+        {/* <div> */}
+        {/*   {playlistDetail.tracks.items.map((trackDetail) => { */}
+        {/*     return ( */}
+        {/*       <div key={trackDetail.track.id}> */}
+        {/*         {trackDetail.track.name} - {trackDetail.track.album.name} */}
+        {/*       </div> */}
+        {/*     ); */}
+        {/*   })} */}
+        {/* </div> */}
+
+        {/* <PlaylistTable /> */}
       </section>
     </div>
   );
