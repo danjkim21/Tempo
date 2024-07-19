@@ -1,8 +1,8 @@
 import PlaylistGrid from "./PlaylistGrid";
-import { fetchPlaylists } from "@/app/actions/spotify/queries";
+import { getPlaylists } from "@/app/actions/spotify/queries";
 
 export default async function PlaylistsPage() {
-  const playlists = await fetchPlaylists();
+  const playlists = await getPlaylists();
 
   return (
     <div className="grid gap-8">

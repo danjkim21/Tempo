@@ -10,8 +10,8 @@ import {
 import Image from "next/image";
 import { PlaylistTable } from "./playlistTable";
 import {
-  fetchPlaylistDetail,
-  fetchPlaylistTracks,
+  getPlaylistDetail,
+  getPlaylistTracks,
 } from "@/app/actions/spotify/queries";
 
 export default async function PlaylistDetailPage({
@@ -19,11 +19,11 @@ export default async function PlaylistDetailPage({
 }: {
   params: { playlistId: string };
 }) {
-  const playlistDetail = await fetchPlaylistDetail({
+  const playlistDetail = await getPlaylistDetail({
     playlistId: params.playlistId,
   });
 
-  const playlistTracksAll = await fetchPlaylistTracks({
+  const playlistTracksAll = await getPlaylistTracks({
     playlistId: params.playlistId,
   });
 
