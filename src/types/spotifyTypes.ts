@@ -1,3 +1,5 @@
+// TODO: fix types for spotify responses later
+
 type SpotifyImage = {
   height: number | null;
   url: string;
