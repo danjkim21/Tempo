@@ -9,10 +9,8 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { PlaylistTable } from "./playlistTable";
-import {
-  getPlaylistDetail,
-  getPlaylistTracks,
-} from "@/app/actions/spotify/queries";
+import { getPlaylistDetail } from "@/app/actions/spotify/queries";
+import TracksSectionSuspense from "./trackSection";
 
 export default async function PlaylistDetailPage({
   params,
@@ -22,12 +20,6 @@ export default async function PlaylistDetailPage({
   const playlistDetail = await getPlaylistDetail({
     playlistId: params.playlistId,
   });
-
-  const playlistTracksAll = await getPlaylistTracks({
-    playlistId: params.playlistId,
-  });
-
-  console.log(playlistTracksAll.length);
 
   return (
     <div>
@@ -69,21 +61,7 @@ export default async function PlaylistDetailPage({
         </Card>
       </section>
 
-      <section>
-        <h2 className="mb-4 text-xl font-bold">Songs</h2>
-
-        {/* <div> */}
-        {/*   {playlistDetail.tracks.items.map((trackDetail) => { */}
-        {/*     return ( */}
-        {/*       <div key={trackDetail.track.id}> */}
-        {/*         {trackDetail.track.name} - {trackDetail.track.album.name} */}
-        {/*       </div> */}
-        {/*     ); */}
-        {/*   })} */}
-        {/* </div> */}
-
-        {/* <PlaylistTable /> */}
-      </section>
+      <TracksSectionSuspense playlistId={params.playlistId} />
     </div>
   );
 }
